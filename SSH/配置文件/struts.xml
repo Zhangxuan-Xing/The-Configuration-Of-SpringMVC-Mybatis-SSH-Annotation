@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Struts 2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置了系列常量 以book为例 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true"/>	
+	<package name="com" namespace="/" extends="struts-default">
+		<action name="addBook" class="com.BookAction"  method="add">
+			<!-- 添加图书成功，列出所有图书 -->
+			<result type="chain">listBooks</result>
+			<!-- 添加图书失败，跳转到添加图书的表单页 -->	
+		</action>
+
+		<action name="deleteBook" class="com.BookAction"  method="delete">
+			<result type="chain">listBooks</result>
+		</action>		
+
+		<!-- 让用户直接访问该应用时列出所有视图页面 -->
+		<action name="*">
+			<result>/{1}.jsp</result>
+		</action>
+	</package>
+</struts>
